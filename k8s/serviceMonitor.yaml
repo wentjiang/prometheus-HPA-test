@@ -1,0 +1,27 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  #  填写一个唯一名称
+  name: prometheus-test-sm
+  #  填写目标命名空间
+  namespace: local
+  labels:
+    # 通过这个标签发现monitor,这个标签需要找到
+    # kubectl get prometheus ack-prometheus-operator-prometheus  -n monitoring -o yaml
+    # 对应的serviceMonitorSelector 通过添加这个标签实现
+    release: ops-prometheus
+spec:
+  endpoints:
+    - interval: 30s
+      #  填写service.yaml中Prometheus Exporter对应的Port的Name字段的值
+      port: http
+      #  填写Prometheus Exporter对应的Path的值
+      path: /prometheus-test/1.0/actuator/prometheus
+  namespaceSelector:
+    matchNames:
+      - local
+    #  Nginx Demo的命名空间
+  selector:
+    matchLabels:
+      #  填写service.yaml的Label字段的值以定位目标service.yaml
+      app: prometheus-test

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-test
+  namespace: local
+  labels:
+    app: prometheus-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-test
+  template:
+    metadata:
+      labels:
+        app: prometheus-test
+    spec:
+      containers:
+        - name: prometheus-test
+          env:
+            - name: test-key
+              value: test-value
+          image: wentjiang/prometheus-test:1.1
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 0.2
+              memory: 0.5Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-test
+  namespace: local
+  labels:
+    app: prometheus-test
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: http
+  selector:
+    app: prometheus-test

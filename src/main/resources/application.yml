@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  mvc:
+    servlet:
+      path: /prometheus-test/1.0
+  application:
+    name: prometheus 测试应用
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, prometheus, info
+  server:
+    port: 8080
+
+endpoints:
+  prometheus:
+    path: /actuator/metrics

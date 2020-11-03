@@ -8,7 +8,7 @@ spec:
   metrics:
     - pods:
         metricName: custom_value
-        targetAverageValue: '10m'
+        targetAverageValue: '60m'
       type: Pods
   minReplicas: 1
   scaleTargetRef:

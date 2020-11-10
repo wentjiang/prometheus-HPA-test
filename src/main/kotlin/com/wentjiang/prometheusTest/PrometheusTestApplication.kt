@@ -7,5 +7,12 @@ import org.springframework.boot.runApplication
 class PrometheusTestApplication
 
 fun main(args: Array<String>) {
+	addShutdownHook()
 	runApplication<PrometheusTestApplication>(*args)
+}
+
+fun addShutdownHook() {
+	Runtime.getRuntime().addShutdownHook(Thread(Runnable {
+		print("get shut down message")
+	}))
 }

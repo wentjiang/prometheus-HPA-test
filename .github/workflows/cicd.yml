@@ -19,7 +19,7 @@ jobs:
       - name: test with Gradle
         run: ./gradlew test
       - name: Deploy
-        uses: appleboy/ssh-action@main
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}

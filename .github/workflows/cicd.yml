@@ -27,11 +27,12 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             whoami
-            cd 
+            cd /opt/wentjiang/workspace/prometheusTest
+            git pull origin main
             ./gradlew bootJar -i --no-daemon
             mv build/libs/*.jar ./app.jar
             APP_NAME=wentjiang/prometheus-test
-            TAG="1.1"
+            TAG="latest"
             IMAGE_NAME="${APP_NAME}:${TAG}"
 
             docker build -f Dockerfile -t ${IMAGE_NAME} .

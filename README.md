@@ -5,3 +5,5 @@
 启动后请求 http://localhost:8080/prometheus-test/1.0/actuator
 
 prometheus 指标链接 http://localhost:8080/prometheus-test/1.0/actuator/prometheus
+
+add github action cicd
